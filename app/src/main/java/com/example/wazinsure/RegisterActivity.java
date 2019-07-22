@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setPostRequestContent(conn, jsonObject);
 
         conn.connect();
-        return conn.getResponseMessage() + " " + "Order Submitted";
+        return conn.getResponseMessage() + " " + "Submitted";
     }
 
     private class HTTPAsyncTask extends AsyncTask<String, Void, String> {

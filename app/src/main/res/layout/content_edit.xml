@@ -5,6 +5,8 @@
     style="@style/loginCard"
     app:cardCornerRadius="@dimen/loginCardRadius"
     android:elevation="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:layout_gravity="center"
     android:layout_marginTop="@dimen/loginViewsMargin"
     android:layout_marginBottom="@dimen/loginViewsMargin"
@@ -21,6 +23,18 @@
             android:id="@+id/register"
             android:textSize="20sp"
             android:layout_marginTop="@dimen/loginViewsMargin"/>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                style="@style/modifiedEditText"
+                android:inputType="textPersonName"
+                android:id="@+id/idEditText"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:hint="Id Number"/>
+        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             style="@style/parent"
@@ -227,6 +241,29 @@
                 android:hint="Agent Code"/>
         </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                style="@style/modifiedEditText"
+                android:inputType="textPersonName"
+                android:id="@+id/userEditText"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:hint="Agent User Code"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/parent"
+            android:layout_marginTop="@dimen/signup_text_margin_top">
+            <EditText
+                style="@style/modifiedEditText"
+                android:inputType="textPersonName"
+                android:id="@+id/salesEditText"
+                android:maxLines="1"
+                android:textSize="16sp"
+                android:hint="Sales Channel"/>
+        </android.support.design.widget.TextInputLayout>
 
         <Button
             style="@style/loginButton"
@@ -234,6 +271,14 @@
             android:layout_gravity="center"
             android:onClick="send"
             android:text="Create" />
+
+        <Button
+            style="@style/loginButton"
+            android:id="@+id/deleteButton"
+            android:layout_gravity="center"
+            android:onClick="delete"
+            android:text="Delete" />
+
 
         <TextView
             style="@style/parent"

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    @BindView(R.id.records) TextView mRecords;
+    @BindView(R.id.relative1) RelativeLayout mRelative1;
     @BindView(R.id.createButton) Button mCreate;
     @BindView(R.id.agentEditText) EditText mAgent;
     @BindView(R.id.relationEditText) EditText mRelation;
@@ -49,6 +50,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.nameEditText) EditText mName;
     @BindView(R.id.already) TextView mAlready;
     @BindView(R.id.waz) TextView mWaz;
+    @BindView(R.id.idEditText) EditText mId;
+    @BindView(R.id.userEditText) EditText mUser;
+    @BindView(R.id.salesEditText) EditText mSales;
+    @BindView(R.id.deleteButton) Button mDelete;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +62,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mRecords.setOnClickListener(this);
+
+        mRelative1.setOnClickListener(this);
         checkNetworkConnection();
     }
     @Override
     public void onClick(View v){
-        if(v == mRecords){
-            Intent intent = new Intent(MainActivity.this, RecordsActivity.class);
+        if(v == mRelative1){
+            Intent intent = new Intent(MainActivity.this, CustomerRecords.class);
             startActivity(intent);
         }
     }
@@ -88,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // creation of HttpURLConnection
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
+        conn.setRequestMethod("GET");
         conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 
         // build JSON object, add JSON content to POST request body, make POST request to given URL return response message
@@ -96,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setPostRequestContent(conn, jsonObject);
 
         conn.connect();
-        return conn.getResponseMessage() + " " + "Submitted";
+        return conn.getResponseMessage();
     }
 
     private class HTTPAsyncTask extends AsyncTask<String, Void, String> {
@@ -111,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     return "Failed";
                 }
             } catch (IOException e) {
-                return "Unable to complete customer registration";
+                return "Unable to complete";
             }
         }
 
@@ -125,13 +132,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(MainActivity.this, "Submitted", Toast.LENGTH_SHORT).show();
 
         if(checkNetworkConnection())
-            new MainActivity.HTTPAsyncTask().execute("https://demo.wazinsure.com:4443/api/customers");
+            new MainActivity.HTTPAsyncTask().execute("https://demo.wazinsure.com:4443/api/customers/");
         else
             Toast.makeText(MainActivity.this,"Failed", Toast.LENGTH_SHORT).show();
     }
 
     private JSONObject buildJsonObject() throws JSONException{
         JSONObject jsonObject = new JSONObject();
+        jsonObject.accumulate("id_no",mId.getText().toString());
         jsonObject.accumulate("first_name",mName.getText().toString());
         jsonObject.accumulate("last_name",mLastName.getText().toString());
         jsonObject.accumulate("dob",mDate.getText());
@@ -149,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         jsonObject.accumulate("nok_mobileno",mMobile.getText().toString());
         jsonObject.accumulate("nok_relation",mRelation.getText().toString());
         jsonObject.accumulate("agent_code",mAgent.getText().toString());
+        jsonObject.accumulate("agent_usercode",mUser.getText().toString());
+        jsonObject.accumulate("sales_channel",mSales.getText().toString());
 
         return  jsonObject;
     }
@@ -161,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         writer.close();
         os.close();
     }
+
+
 }
 
 
