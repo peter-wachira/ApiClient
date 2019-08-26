@@ -46,8 +46,8 @@
                 <TextView
                     style="@style/headerText"
                     android:layout_gravity="center"
-                    android:text="Waz Insure"
-                    android:textSize="40sp"
+                    android:text="Wazi Insure"
+                    android:textSize="30sp"
                     android:id="@+id/chap"
                     android:layout_marginTop="40dp"/>
                 <include

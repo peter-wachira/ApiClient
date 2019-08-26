@@ -42,6 +42,7 @@ import retrofit2.http.Path;
 
 public class Delete extends AppCompatActivity {
 
+
     CustomerApiService customerApiService;
 
     @BindView(R.id.delete) Button mDelete;
@@ -55,7 +56,7 @@ public class Delete extends AppCompatActivity {
 
         customerApiService = APIUtils.getCustomerApiService();
 
-        final String customer = "6";
+        final String customer = "34";
 
 
         mDelete.setOnClickListener(new View.OnClickListener() {

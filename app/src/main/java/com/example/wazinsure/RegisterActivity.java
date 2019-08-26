@@ -1,15 +1,18 @@
 package com.example.wazinsure;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +40,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @BindView(R.id.already) TextView mAlready;
     @BindView(R.id.chap) TextView mChap;
     @BindView(R.id.ready) TextView mReady;
+    @BindView(R.id.profileImage)
+    ImageView _profileurlText;
+    Uri resultUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +65,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             startActivity(intent);
         }
+        _profileurlText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseProfileImage();
+            }
+        });
+
     }
+
+
+    //method for selecting image
+    private void chooseProfileImage() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, 1);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
+            final Uri imageUri = data.getData();
+            resultUri = imageUri;
+            _profileurlText.setImageURI(resultUri);
+        }
+    }
+
+
 
     public boolean checkNetworkConnection(){
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -68,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         boolean isConnected = false;
 
         if(networkInfo != null && (isConnected = networkInfo.isConnected())){
-            mChap.setText("Connected");
+            mChap.setText("Network Established");
         } else {
             mChap.setText("Not Connected");
         }

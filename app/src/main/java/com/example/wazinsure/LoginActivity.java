@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         boolean isConnected = false;
 
         if(networkInfo != null && (isConnected = networkInfo.isConnected())){
-            mChap.setText("Connected");
+            mChap.setText("Network Established");
         } else {
             mChap.setText("Not Connected");
         }
@@ -103,8 +103,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         protected void onPostExecute(String result) {
             mAlready.setText(result);
 
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(intent);
+            if (!mUsername.equals("") || !mPassword.equals("")){
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }else{
+                Toast.makeText(LoginActivity.this,"Please enter text", Toast.LENGTH_SHORT).show();
+
+            }
+
         }
     }
 
@@ -114,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(checkNetworkConnection())
             new LoginActivity.HTTPAsyncTask().execute("https://demo.wazinsure.com:4443/auth/login");
         else
-            Toast.makeText(LoginActivity.this,"Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,"Failed to Connect", Toast.LENGTH_SHORT).show();
     }
 
     private JSONObject buildJsonObject() throws JSONException{

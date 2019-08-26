@@ -272,13 +272,6 @@
             android:onClick="send"
             android:text="Create" />
 
-        <Button
-            style="@style/loginButton"
-            android:id="@+id/deleteButton"
-            android:layout_gravity="center"
-            android:onClick="delete"
-            android:text="Delete" />
-
 
         <TextView
             style="@style/parent"

@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CustomerRecords extends AppCompatActivity implements View.OnClickListener{
 
-    private static final String TAG = RecordsActivity.class.getSimpleName();
+    private static final String TAG = CustomerRecords.class.getSimpleName();
     public static final String BASE_URL = "https://demo.wazinsure.com:4443/";
     private static Retrofit retrofit = null;
     private RecyclerView recyclerView = null;

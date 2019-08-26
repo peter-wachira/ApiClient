@@ -21,7 +21,12 @@
             android:id="@+id/register"
             android:textSize="20sp"
             android:layout_marginTop="@dimen/loginViewsMargin"/>
-
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/profilepic" />
         <android.support.design.widget.TextInputLayout
             style="@style/parent"
             android:layout_marginTop="@dimen/signup_text_margin_top">
@@ -128,6 +133,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/ready"
             android:text="Login Here"
+            android:fontFamily="sans-serif-light"
+            android:textColor="#4C9A2A"
             android:layout_below="@id/already"/>
 
     </LinearLayout>

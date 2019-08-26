@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.idEditText) EditText mId;
     @BindView(R.id.userEditText) EditText mUser;
     @BindView(R.id.salesEditText) EditText mSales;
-    @BindView(R.id.deleteButton) Button mDelete;
 
 
     @Override
